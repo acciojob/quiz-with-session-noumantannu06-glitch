@@ -104,33 +104,32 @@ function attachListeners() {
     }
   });
 
-  submitBtn.addEventListener("click", function () {
-    let score = 0;
-    let total = 0;
+	submitBtn.addEventListener("click", function () {
+  let score = 0;
+  let total = 0;
 
-    questions.forEach((q, i) => {
-      const userAnswer = userAnswers[i];
-      if (userAnswer !== undefined) {
-        total++;
-        if (userAnswer === q.answer) {
-          score++;
-        }
+  questions.forEach((q, i) => {
+    const userAnswer = userAnswers[i];
+    if (userAnswer !== undefined) {
+      total++;
+      if (userAnswer === q.answer) {
+        score++;
       }
-    });
-
-    // Display score
-    scoreEl.textContent = `Your score is ${score} out of ${questions.length}.`;
-
-    // Save final score in localStorage
-    localStorage.setItem(
-      "score",
-      JSON.stringify({
-        score,
-        total: questions.length,
-        timestamp: Date.now(),
-      })
-    );
+    }
   });
+
+  scoreEl.textContent = `Your score is ${score} out of ${questions.length}.`;
+
+  // Fix: store as JSON object, not just number
+  localStorage.setItem(
+    "score",
+    JSON.stringify({
+      score,
+      total: questions.length,
+      timestamp: Date.now()
+    })
+  );
+});
 
   // Show last score on page load if available
   if (localStorage.getItem("score")) {
