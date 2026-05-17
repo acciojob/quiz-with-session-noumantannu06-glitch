@@ -1,28 +1,33 @@
 const questions = [
   {
-    question: "What is 2 + 2?",
-    options: ["1", "2", "4", "5"],
-    answer: "4",
+    question: "What is the capital of France?",
+    options: ["Paris", "London", "Rome", "Berlin"],
+    answer: "Paris",
   },
   {
-    question: "Which is a frontend language?",
-    options: ["Python", "JavaScript", "Java", "C++"],
+    question: "Which language runs in the browser?",
+    options: ["Python", "Java", "C", "JavaScript"],
     answer: "JavaScript",
   },
   {
-    question: "Which tag is used for paragraph?",
-    options: ["div", "p", "span", "h1"],
-    answer: "p",
+    question: "What does HTML stand for?",
+    options: [
+      "Hyper Text Markup Language",
+      "High Text Markup Language",
+      "Hyperlinks and Text Markup Language",
+      "Home Tool Markup Language",
+    ],
+    answer: "Hyper Text Markup Language",
   },
   {
-    question: "Which method converts JSON text to object?",
-    options: ["JSON.parse()", "JSON.stringify()", "parseInt()", "Object.create()"],
-    answer: "JSON.parse()",
+    question: "Which method is used to print in console?",
+    options: ["console.log()", "print()", "echo()", "write()"],
+    answer: "console.log()",
   },
   {
-    question: "Which one is a CSS property?",
-    options: ["font-size", "push", "pop", "map"],
-    answer: "font-size",
+    question: "Which one is a CSS framework?",
+    options: ["React", "Bootstrap", "Node", "Express"],
+    answer: "Bootstrap",
   },
 ];
 
@@ -39,10 +44,10 @@ function renderQuestions() {
     const qBlock = document.createElement("div");
 
     const qTitle = document.createElement("p");
-    qTitle.textContent = `${qIndex + 1}. ${q.question}`;
+    qTitle.textContent = q.question;
     qBlock.appendChild(qTitle);
 
-    q.options.forEach((option, oIndex) => {
+    q.options.forEach((option) => {
       const label = document.createElement("label");
       label.style.display = "block";
 
@@ -81,18 +86,20 @@ function calculateScore() {
   return score;
 }
 
+function restoreScore() {
+  const savedScore = localStorage.getItem("score");
+  if (savedScore !== null) {
+    scoreDiv.textContent = `Your score is ${savedScore} out of 5.`;
+  } else {
+    scoreDiv.textContent = "";
+  }
+}
+
 submitBtn.addEventListener("click", () => {
   const score = calculateScore();
   scoreDiv.textContent = `Your score is ${score} out of 5.`;
   localStorage.setItem("score", score);
 });
-
-function restoreScore() {
-  const savedScore = localStorage.getItem("score");
-  if (savedScore !== null) {
-    scoreDiv.textContent = `Your score is ${savedScore} out of 5.`;
-  }
-}
 
 renderQuestions();
 restoreScore();
