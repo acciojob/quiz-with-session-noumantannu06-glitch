@@ -1,8 +1,8 @@
 const questions = [
   {
-    question: "What is the capital of France?",
-    options: ["Paris", "London", "Rome", "Berlin"],
-    answer: "Paris",
+    question: "What is the highest mountain in the world?",
+    options: ["K2", "Mount Everest", "Kangchenjunga", "Lhotse"],
+    answer: "Mount Everest",
   },
   {
     question: "Which language runs in the browser?",
@@ -20,7 +20,7 @@ const questions = [
     answer: "Hyper Text Markup Language",
   },
   {
-    question: "Which method is used to print in console?",
+    question: "Which method is used to print in the console?",
     options: ["console.log()", "print()", "echo()", "write()"],
     answer: "console.log()",
   },
@@ -86,6 +86,12 @@ function calculateScore() {
   return score;
 }
 
+submitBtn.addEventListener("click", () => {
+  const score = calculateScore();
+  scoreDiv.textContent = `Your score is ${score} out of 5.`;
+  localStorage.setItem("score", String(score));
+});
+
 function restoreScore() {
   const savedScore = localStorage.getItem("score");
   if (savedScore !== null) {
@@ -94,12 +100,6 @@ function restoreScore() {
     scoreDiv.textContent = "";
   }
 }
-
-submitBtn.addEventListener("click", () => {
-  const score = calculateScore();
-  scoreDiv.textContent = `Your score is ${score} out of 5.`;
-  localStorage.setItem("score", score);
-});
 
 renderQuestions();
 restoreScore();
